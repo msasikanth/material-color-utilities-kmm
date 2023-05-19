@@ -9,12 +9,12 @@ import dev.sasikanth.material.color.utilities.quantize.QuantizerCelebi
 import dev.sasikanth.material.color.utilities.scheme.SchemeContent
 import dev.sasikanth.material.color.utilities.score.Score
 
-val score = Score.score(
-  QuantizerCelebi.quantize(intArrayOf(), 128)
-)[0]
+val seedColor = Score.score(
+  QuantizerCelebi.quantize(bitmapPixels, 128)
+)[0] // or specific AARRGGBB color int
 
 val scheme = SchemeContent(
-  sourceColorHct = Hct.fromInt(score),
+  sourceColorHct = Hct.fromInt(seedColor),
   isDark = true,
   contrastLevel = 0.0
 )
