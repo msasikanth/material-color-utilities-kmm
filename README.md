@@ -1,0 +1,37 @@
+# Material Color Utilities
+
+KMM port of [Material Color Utilities Java package](https://github.com/material-foundation/material-color-utilities/tree/main/java)
+
+```kotlin
+import dev.sasikanth.material.color.utilities.dynamiccolor.MaterialDynamicColors
+import dev.sasikanth.material.color.utilities.hct.Hct
+import dev.sasikanth.material.color.utilities.quantize.QuantizerCelebi
+import dev.sasikanth.material.color.utilities.scheme.SchemeContent
+import dev.sasikanth.material.color.utilities.score.Score
+
+val score = Score.score(
+  QuantizerCelebi.quantize(intArrayOf(), 128)
+)[0]
+
+val scheme = SchemeContent(
+  sourceColorHct = Hct.fromInt(score),
+  isDark = true,
+  contrastLevel = 0.0
+)
+
+val dynamicColors = MaterialDynamicColors()
+// Create list of Material tokens you want to use/update
+// based on the scheme
+val tokens = mapOf(
+  "primary" to dynamicColors.primary(),
+  "secondary" to dynamicColors.secondary()
+)
+
+val colorsOutput = mutableMapOf<String, Int>()
+for (token in tokens) {
+  colorsOutput[token.key] = token.value.getArgb(scheme)
+}
+
+// Use/Update theme colors
+
+```
