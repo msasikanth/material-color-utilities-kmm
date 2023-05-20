@@ -2,6 +2,14 @@
 
 KMM port of [Material Color Utilities Java package](https://github.com/material-foundation/material-color-utilities/tree/main/java)
 
+### Dependency
+
+```kotlin
+implementation("dev.sasikanth:material-color-utilities:<version>")
+```
+
+### Usage
+
 ```kotlin
 import dev.sasikanth.material.color.utilities.dynamiccolor.MaterialDynamicColors
 import dev.sasikanth.material.color.utilities.hct.Hct
