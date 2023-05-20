@@ -47,6 +47,37 @@ import kotlin.math.round
  * provided by a function that takes a DynamicScheme and returns a value. This ensures ultimate
  * flexibility, any desired behavior of a color for any design system, but it usually unnecessary.
  * See the default constructor for more information.
+ *
+ * The base constructor for DynamicColor.
+ *
+ *
+ * Functional arguments allow overriding without risks that come with subclasses. _Strongly_
+ * prefer using one of the static convenience constructors. This class is arguably too flexible to
+ * ensure it can support any scenario.
+ *
+ *
+ * For example, the default behavior of adjust tone at max contrast to be at a 7.0 ratio with
+ * its background is principled and matches a11y guidance. That does not mean it's the desired
+ * approach for _every_ design system, and every color pairing, always, in every case.
+ *
+ * @param hue given DynamicScheme, return the hue in HCT of the output color.
+ * @param chroma given DynamicScheme, return chroma in HCT of the output color.
+ * @param tone given DynamicScheme, return tone in HCT of the output color.
+ * @param background given DynamicScheme, return the DynamicColor that is the background of this
+ * DynamicColor. When this is provided, automated adjustments to lower and raise contrast are
+ * made.
+ * @param toneMinContrast given DynamicScheme, return tone in HCT/L* in L*a*b* this color should
+ * be at minimum contrast. See toneMinContrastDefault for the default behavior, and strongly
+ * consider using it unless you have strong opinions on a11y. The static constructors use it.
+ * @param toneMaxContrast given DynamicScheme, return tone in HCT/L* in L*a*b* this color should
+ * be at maximum contrast. See toneMaxContrastDefault for the default behavior, and strongly
+ * consider using it unless you have strong opinions on a11y. The static constructors use it.
+ * @param toneDeltaConstraint given DynamicScheme, return a ToneDeltaConstraint instance that
+ * describes a requirement that this DynamicColor must always have some difference in tone/L*
+ * from another DynamicColor.<br></br>
+ * Unlikely to be useful unless a design system has some distortions where colors that don't
+ * have a background/foreground relationship must have _some_ difference in tone, yet, not
+ * enough difference to create meaningful contrast.
  */
 // Prevent lint for Function.apply not being available on Android before API level 14 (4.0.1).
 // "AndroidJdkLibsChecker" for Function, "NewApi" for Function.apply().
@@ -54,67 +85,16 @@ import kotlin.math.round
 // annotation; another solution would be to create an android_library rule and supply
 // AndroidManifest with an SDK set higher than 14.
 class DynamicColor(
-  hue: (DynamicScheme) -> Double,
-  chroma: (DynamicScheme) -> Double,
-  tone: (DynamicScheme) -> Double,
-  opacity: ((DynamicScheme) -> Double)?,
-  background: ((DynamicScheme) -> DynamicColor)?,
-  toneMinContrast: (DynamicScheme) -> Double,
-  toneMaxContrast: (DynamicScheme) -> Double,
-  toneDeltaConstraint: ((DynamicScheme) -> ToneDeltaConstraint)?
-) {
-  val hue: (DynamicScheme) -> Double
-  val chroma: (DynamicScheme) -> Double
-  val tone: (DynamicScheme) -> Double
-  val opacity: ((DynamicScheme) -> Double)?
-  val background: ((DynamicScheme) -> DynamicColor)?
-  val toneMinContrast: (DynamicScheme) -> Double
-  val toneMaxContrast: (DynamicScheme) -> Double
+  val hue: (DynamicScheme) -> Double,
+  val chroma: (DynamicScheme) -> Double,
+  val tone: (DynamicScheme) -> Double,
+  val opacity: ((DynamicScheme) -> Double)?,
+  val background: ((DynamicScheme) -> DynamicColor)?,
+  val toneMinContrast: (DynamicScheme) -> Double,
+  val toneMaxContrast: (DynamicScheme) -> Double,
   val toneDeltaConstraint: ((DynamicScheme) -> ToneDeltaConstraint)?
+) {
   private val hctCache: HashMap<DynamicScheme, Hct> = HashMap()
-
-  /**
-   * The base constructor for DynamicColor.
-   *
-   *
-   * Functional arguments allow overriding without risks that come with subclasses. _Strongly_
-   * prefer using one of the static convenience constructors. This class is arguably too flexible to
-   * ensure it can support any scenario.
-   *
-   *
-   * For example, the default behavior of adjust tone at max contrast to be at a 7.0 ratio with
-   * its background is principled and matches a11y guidance. That does not mean it's the desired
-   * approach for _every_ design system, and every color pairing, always, in every case.
-   *
-   * @param hue given DynamicScheme, return the hue in HCT of the output color.
-   * @param chroma given DynamicScheme, return chroma in HCT of the output color.
-   * @param tone given DynamicScheme, return tone in HCT of the output color.
-   * @param background given DynamicScheme, return the DynamicColor that is the background of this
-   * DynamicColor. When this is provided, automated adjustments to lower and raise contrast are
-   * made.
-   * @param toneMinContrast given DynamicScheme, return tone in HCT/L* in L*a*b* this color should
-   * be at minimum contrast. See toneMinContrastDefault for the default behavior, and strongly
-   * consider using it unless you have strong opinions on a11y. The static constructors use it.
-   * @param toneMaxContrast given DynamicScheme, return tone in HCT/L* in L*a*b* this color should
-   * be at maximum contrast. See toneMaxContrastDefault for the default behavior, and strongly
-   * consider using it unless you have strong opinions on a11y. The static constructors use it.
-   * @param toneDeltaConstraint given DynamicScheme, return a ToneDeltaConstraint instance that
-   * describes a requirement that this DynamicColor must always have some difference in tone/L*
-   * from another DynamicColor.<br></br>
-   * Unlikely to be useful unless a design system has some distortions where colors that don't
-   * have a background/foreground relationship must have _some_ difference in tone, yet, not
-   * enough difference to create meaningful contrast.
-   */
-  init {
-    this.hue = hue
-    this.chroma = chroma
-    this.tone = tone
-    this.opacity = opacity
-    this.background = background
-    this.toneMinContrast = toneMinContrast
-    this.toneMaxContrast = toneMaxContrast
-    this.toneDeltaConstraint = toneDeltaConstraint
-  }
 
   fun getArgb(scheme: DynamicScheme): Int {
     val argb: Int = getHct(scheme).toInt()
