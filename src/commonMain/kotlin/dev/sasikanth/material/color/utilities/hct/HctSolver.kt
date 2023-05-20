@@ -575,9 +575,9 @@ object HctSolver {
       val gamma = 23.0 * (p2 + 0.305) * t / (23.0 * p1 + 11 * t * hCos + 108.0 * t * hSin)
       val a = gamma * hCos
       val b = gamma * hSin
-      val rA = 460.0 * p2 + 451.0 * a + 288.0 * b / 1403.0
-      val gA = 460.0 * p2 - 891.0 * a - 261.0 * b / 1403.0
-      val bA = 460.0 * p2 - 220.0 * a - 6300.0 * b / 1403.0
+      val rA = (460.0 * p2 + 451.0 * a + 288.0 * b) / 1403.0
+      val gA = (460.0 * p2 - 891.0 * a - 261.0 * b) / 1403.0
+      val bA = (460.0 * p2 - 220.0 * a - 6300.0 * b) / 1403.0
       val rCScaled = inverseChromaticAdaptation(rA)
       val gCScaled = inverseChromaticAdaptation(gA)
       val bCScaled = inverseChromaticAdaptation(bA)
