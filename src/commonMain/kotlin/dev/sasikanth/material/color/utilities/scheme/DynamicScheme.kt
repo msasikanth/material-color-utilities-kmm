@@ -18,7 +18,6 @@ package dev.sasikanth.material.color.utilities.scheme
 import dev.sasikanth.material.color.utilities.hct.Hct
 import dev.sasikanth.material.color.utilities.palettes.TonalPalette
 import dev.sasikanth.material.color.utilities.utils.MathUtils
-import scheme.Variant
 
 /**
  * Provides important settings for creating colors dynamically, and 6 color palettes. Requires: 1. A

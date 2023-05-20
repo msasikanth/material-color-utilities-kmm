@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package scheme
+package dev.sasikanth.material.color.utilities.scheme
 
 /** Themes for Dynamic Color.  */
 enum class Variant {

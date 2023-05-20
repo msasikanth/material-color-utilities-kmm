@@ -18,7 +18,6 @@ package dev.sasikanth.material.color.utilities.scheme
 import dev.sasikanth.material.color.utilities.hct.Hct
 import dev.sasikanth.material.color.utilities.palettes.TonalPalette
 import dev.sasikanth.material.color.utilities.utils.MathUtils
-import scheme.Variant
 
 /** A playful theme - the source color's hue does not appear in the theme.  */
 class SchemeExpressive(sourceColorHct: Hct, isDark: Boolean, contrastLevel: Double) : DynamicScheme(

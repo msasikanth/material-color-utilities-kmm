@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package dynamiccolor
+package dev.sasikanth.material.color.utilities.dynamiccolor
 
+import dev.sasikanth.material.color.utilities.dynamiccolor.DynamicColor
 import dev.sasikanth.material.color.utilities.dynamiccolor.TonePolarity
 
 /**

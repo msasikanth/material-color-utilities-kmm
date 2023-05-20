@@ -17,7 +17,6 @@ package dev.sasikanth.material.color.utilities.scheme
 
 import dev.sasikanth.material.color.utilities.hct.Hct
 import dev.sasikanth.material.color.utilities.palettes.TonalPalette
-import scheme.Variant
 
 /** A monochrome theme, colors are purely black / white / gray.  */
 class SchemeMonochrome(sourceColorHct: Hct, isDark: Boolean, contrastLevel: Double) : DynamicScheme(

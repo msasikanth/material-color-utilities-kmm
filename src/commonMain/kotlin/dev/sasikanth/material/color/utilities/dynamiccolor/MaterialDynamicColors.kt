@@ -19,9 +19,7 @@ import dev.sasikanth.material.color.utilities.dislike.DislikeAnalyzer
 import dev.sasikanth.material.color.utilities.hct.Hct
 import dev.sasikanth.material.color.utilities.hct.ViewingConditions
 import dev.sasikanth.material.color.utilities.scheme.DynamicScheme
-import dynamiccolor.DynamicColor
-import dynamiccolor.ToneDeltaConstraint
-import scheme.Variant
+import dev.sasikanth.material.color.utilities.scheme.Variant
 import kotlin.math.abs
 import kotlin.math.max
 

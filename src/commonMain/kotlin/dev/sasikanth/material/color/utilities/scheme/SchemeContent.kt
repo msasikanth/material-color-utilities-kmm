@@ -18,7 +18,6 @@ package dev.sasikanth.material.color.utilities.scheme
 import dev.sasikanth.material.color.utilities.dislike.DislikeAnalyzer
 import dev.sasikanth.material.color.utilities.hct.Hct
 import dev.sasikanth.material.color.utilities.palettes.TonalPalette
-import scheme.Variant
 import dev.sasikanth.material.color.utilities.temperature.TemperatureCache
 import kotlin.math.max
 

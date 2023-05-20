@@ -17,7 +17,6 @@ package dev.sasikanth.material.color.utilities.scheme
 
 import dev.sasikanth.material.color.utilities.hct.Hct
 import dev.sasikanth.material.color.utilities.palettes.TonalPalette
-import scheme.Variant
 
 /** A loud theme, colorfulness is maximum for Primary palette, increased for others.  */
 class SchemeVibrant(sourceColorHct: Hct, isDark: Boolean, contrastLevel: Double) : DynamicScheme(
