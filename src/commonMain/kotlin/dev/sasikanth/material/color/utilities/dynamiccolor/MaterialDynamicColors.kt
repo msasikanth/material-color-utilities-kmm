@@ -509,16 +509,17 @@ class MaterialDynamicColors {
 
   companion object {
     const val CONTAINER_ACCENT_TONE_DELTA = 15.0
+
     private fun viewingConditionsForAlbers(scheme: DynamicScheme): ViewingConditions {
       return ViewingConditions.defaultWithBackgroundLstar(if (scheme.isDark) 30.0 else 80.0)
     }
 
     private fun isFidelity(scheme: DynamicScheme): Boolean {
-      return scheme.variant === Variant.FIDELITY || scheme.variant === Variant.CONTENT
+      return scheme.variant == Variant.FIDELITY || scheme.variant == Variant.CONTENT
     }
 
     private fun isMonochrome(scheme: DynamicScheme): Boolean {
-      return scheme.variant === Variant.MONOCHROME
+      return scheme.variant == Variant.MONOCHROME
     }
 
     fun findDesiredChromaByTone(
