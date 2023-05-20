@@ -19,6 +19,7 @@ import dev.sasikanth.material.color.utilities.hct.Hct
 import dev.sasikanth.material.color.utilities.utils.MathUtils
 import kotlin.jvm.JvmOverloads
 import kotlin.math.floor
+import kotlin.math.round
 import kotlin.math.roundToInt
 
 /**
@@ -58,12 +59,12 @@ object Score {
     fallbackColorARGB: Int = -0xbd7a0c,
     filter: Boolean = true
   ): List<Int> {
-
     // Get the HCT color for each Argb value, while finding the per hue count and
     // total count.
-    val colorsHct: MutableList<Hct> = ArrayList()
+    val colorsHct = mutableListOf<Hct>()
     val huePopulation = IntArray(360)
     var populationSum = 0.0
+
     for ((key, value) in colorsToPopulation) {
       val hct: Hct = Hct.fromInt(key)
       colorsHct.add(hct)
@@ -84,9 +85,9 @@ object Score {
 
     // Scores each HCT color based on usage and chroma, while optionally
     // filtering out values that do not have enough chroma or usage.
-    val scoredHcts: MutableList<ScoredHCT> = ArrayList<ScoredHCT>()
+    val scoredHcts = mutableListOf<ScoredHCT>()
     for (hct in colorsHct) {
-      val hue: Int = MathUtils.sanitizeDegreesInt(hct.getHue().roundToInt())
+      val hue: Int = MathUtils.sanitizeDegreesInt(round(hct.getHue()).toInt())
       val proportion = hueExcitedProportions[hue]
       if (filter && (hct.getChroma() < CUTOFF_CHROMA || proportion <= CUTOFF_EXCITED_PROPORTION)) {
         continue
@@ -104,7 +105,7 @@ object Score {
     // the colors with the largest distribution of hues possible. Starting at
     // 90 degrees(maximum difference for 4 colors) then decreasing down to a
     // 15 degree minimum.
-    val chosenColors: MutableList<Hct> = ArrayList<Hct>()
+    val chosenColors = mutableListOf<Hct>()
     for (differenceDegrees in 90 downTo 15) {
       chosenColors.clear()
       for (entry in scoredHcts) {

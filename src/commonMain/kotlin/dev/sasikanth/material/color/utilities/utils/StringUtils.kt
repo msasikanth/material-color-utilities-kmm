@@ -16,7 +16,7 @@
 package dev.sasikanth.material.color.utilities.utils
 
 /** Utility methods for string representations of colors.  */
-internal object StringUtils {
+object StringUtils {
   /**
    * Hex string representing color, ex. #ff0000 for red.
    *

@@ -17,7 +17,6 @@ package dev.sasikanth.material.color.utilities.quantize
 
 /** Creates a dictionary with keys of colors, and values of count of the color  */
 class QuantizerMap : Quantizer {
-  var colorToCount: Map<Int, Int>? = null
 
   override fun quantize(pixels: IntArray, colorCount: Int): QuantizerResult {
     val pixelByCount: MutableMap<Int, Int> = LinkedHashMap<Int, Int>()
@@ -26,7 +25,6 @@ class QuantizerMap : Quantizer {
       val newPixelCount = if (currentPixelCount == null) 1 else currentPixelCount + 1
       pixelByCount[pixel] = newPixelCount
     }
-    colorToCount = pixelByCount
     return QuantizerResult(pixelByCount)
   }
 }

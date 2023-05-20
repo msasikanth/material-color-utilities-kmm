@@ -123,7 +123,7 @@ class DynamicColor(
     }
     val percentage: Double = opacity.invoke(scheme)
     val alpha: Int = MathUtils.clampInt(0, 255, round(percentage * 255).toInt())
-    return argb and 0x00ffffff or (alpha shl 24)
+    return (argb and 0x00ffffff) or (alpha shl 24)
   }
 
   fun getHct(scheme: DynamicScheme): Hct {

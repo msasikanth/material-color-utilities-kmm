@@ -212,9 +212,9 @@ class Cam16
     // accurate, across implementations takes precedence.
     fun fromIntInViewingConditions(argb: Int, viewingConditions: ViewingConditions): Cam16 {
       // Transform ARGB int to XYZ
-      val red = argb and 0x00ff0000 shr 16
-      val green = argb and 0x0000ff00 shr 8
-      val blue = argb and 0x000000ff
+      val red = (argb and 0x00ff0000) shr 16
+      val green = (argb and 0x0000ff00) shr 8
+      val blue = (argb and 0x000000ff)
       val redL: Double = ColorUtils.linearized(red)
       val greenL: Double = ColorUtils.linearized(green)
       val blueL: Double = ColorUtils.linearized(blue)
@@ -229,14 +229,14 @@ class Cam16
     ): Cam16 {
       // Transform XYZ to 'cone'/'rgb' responses
       val matrix = XYZ_TO_CAM16RGB
-      val rT = x * matrix[0][0] + y * matrix[0][1] + z * matrix[0][2]
-      val gT = x * matrix[1][0] + y * matrix[1][1] + z * matrix[1][2]
-      val bT = x * matrix[2][0] + y * matrix[2][1] + z * matrix[2][2]
+      val rT = (x * matrix[0][0]) + (y * matrix[0][1]) + (z * matrix[0][2])
+      val gT = (x * matrix[1][0]) + (y * matrix[1][1]) + (z * matrix[1][2])
+      val bT = (x * matrix[2][0]) + (y * matrix[2][1]) + (z * matrix[2][2])
 
       // Discount illuminant
-      val rD: Double = viewingConditions.rgbD.get(0) * rT
-      val gD: Double = viewingConditions.rgbD.get(1) * gT
-      val bD: Double = viewingConditions.rgbD.get(2) * bT
+      val rD: Double = viewingConditions.rgbD[0] * rT
+      val gD: Double = viewingConditions.rgbD[1] * gT
+      val bD: Double = viewingConditions.rgbD[2] * bT
 
       // Chromatic adaptation
       val rAF: Double = (viewingConditions.fl * abs(rD) / 100.0).pow(0.42)
@@ -252,7 +252,7 @@ class Cam16
       val b = (rA + gA - 2.0 * bA) / 9.0
 
       // auxiliary components
-      val u = 20.0 * rA + 20.0 * gA + 21.0 * bA / 20.0
+      val u = (20.0 * rA + 20.0 * gA + 21.0 * bA) / 20.0
       val p2 = (40.0 * rA + 20.0 * gA + bA) / 20.0
 
       // hue

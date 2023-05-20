@@ -45,7 +45,7 @@ object ColorUtils {
 
   /** Converts a color from RGB components to ARGB format.  */
   fun argbFromRgb(red: Int, green: Int, blue: Int): Int {
-    return 255 shl 24 or (red and 255 shl 16) or (green and 255 shl 8) or (blue and 255)
+    return (255 shl 24) or ((red and 255) shl 16) or ((green and 255) shl 8) or (blue and 255)
   }
 
   /** Converts a color from linear RGB components to ARGB format.  */
@@ -58,17 +58,17 @@ object ColorUtils {
 
   /** Returns the alpha component of a color in ARGB format.  */
   fun alphaFromArgb(argb: Int): Int {
-    return argb shr 24 and 255
+    return (argb shr 24) and 255
   }
 
   /** Returns the red component of a color in ARGB format.  */
   fun redFromArgb(argb: Int): Int {
-    return argb shr 16 and 255
+    return (argb shr 16) and 255
   }
 
   /** Returns the green component of a color in ARGB format.  */
   fun greenFromArgb(argb: Int): Int {
-    return argb shr 8 and 255
+    return (argb shr 8) and 255
   }
 
   /** Returns the blue component of a color in ARGB format.  */

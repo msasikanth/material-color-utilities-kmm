@@ -51,6 +51,7 @@ class QuantizerWu : Quantizer {
     momentsG = IntArray(TOTAL_SIZE)
     momentsB = IntArray(TOTAL_SIZE)
     moments = DoubleArray(TOTAL_SIZE)
+
     for ((pixel, count) in pixels) {
       val red: Int = ColorUtils.redFromArgb(pixel)
       val green: Int = ColorUtils.greenFromArgb(pixel)
@@ -151,7 +152,7 @@ class QuantizerWu : Quantizer {
         val r = volume(cube, momentsR) / weight
         val g = volume(cube, momentsG) / weight
         val b = volume(cube, momentsB) / weight
-        val color = 255 shl 24 or (r and 0x0ff shl 16) or (g and 0x0ff shl 8) or (b and 0x0ff)
+        val color = (255 shl 24) or ((r and 0x0ff) shl 16) or ((g and 0x0ff) shl 8) or (b and 0x0ff)
         colors.add(color)
       }
     }
@@ -302,7 +303,7 @@ class QuantizerWu : Quantizer {
     private const val INDEX_COUNT = 33 // ((1 << INDEX_BITS) + 1)
     private const val TOTAL_SIZE = 35937 // INDEX_COUNT * INDEX_COUNT * INDEX_COUNT
     fun getIndex(r: Int, g: Int, b: Int): Int {
-      return r shl INDEX_BITS * 2 + (r shl INDEX_BITS + 1) + r + (g shl INDEX_BITS) + g + b
+      return (r shl INDEX_BITS * 2) + (r shl (INDEX_BITS + 1)) + r + (g shl INDEX_BITS) + g + b
     }
 
     fun volume(cube: Box?, moment: IntArray): Int {
