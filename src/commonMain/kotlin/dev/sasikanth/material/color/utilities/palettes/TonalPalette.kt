@@ -20,15 +20,11 @@ import dev.sasikanth.material.color.utilities.hct.Hct
 /**
  * A convenience class for retrieving colors that are constant in hue and chroma, but vary in tone.
  */
-class TonalPalette private constructor(hue: Double, chroma: Double) {
-  var cache: MutableMap<Int, Int?> = mutableMapOf()
-  var hue: Double
-  var chroma: Double
-
-  init {
-    this.hue = hue
-    this.chroma = chroma
-  }
+class TonalPalette private constructor(
+  val hue: Double,
+  val chroma: Double
+) {
+  private val cache: MutableMap<Int, Int?> = mutableMapOf()
 
   /**
    * Create an ARGB color with HCT hue and chroma of this Tones instance, and the provided HCT tone.
