@@ -55,7 +55,6 @@ class MaterialDynamicColors {
     return DynamicColor.fromPalette({ s -> s.neutralPalette }) { s -> if (s.isDark) 24.0 else 98.0 }
   }
 
-
   fun surfaceDim(): DynamicColor {
     return DynamicColor.fromPalette({ s -> s.neutralPalette }) { s -> if (s.isDark) 6.0 else 87.0 }
   }
@@ -509,7 +508,7 @@ class MaterialDynamicColors {
   }
 
   companion object {
-    private const val CONTAINER_ACCENT_TONE_DELTA = 15.0
+    const val CONTAINER_ACCENT_TONE_DELTA = 15.0
     private fun viewingConditionsForAlbers(scheme: DynamicScheme): ViewingConditions {
       return ViewingConditions.defaultWithBackgroundLstar(if (scheme.isDark) 30.0 else 80.0)
     }
