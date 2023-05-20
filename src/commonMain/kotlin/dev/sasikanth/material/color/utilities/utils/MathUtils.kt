@@ -105,12 +105,12 @@ object MathUtils {
    * @return a degree measure between 0.0 (inclusive) and 360.0 (exclusive).
    */
   fun sanitizeDegreesDouble(degrees: Double): Double {
-    var degrees = degrees
-    degrees = degrees % 360.0
-    if (degrees < 0) {
-      degrees = degrees + 360.0
+    var targetDegrees = degrees
+    targetDegrees %= 360.0
+    if (targetDegrees < 0) {
+      targetDegrees += 360.0
     }
-    return degrees
+    return targetDegrees
   }
 
   /**
